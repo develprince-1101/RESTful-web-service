@@ -14,6 +14,7 @@ class CreateBusinessAddressesTable extends Migration
     public function up()
     {
         Schema::create('business_addresses', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('address_id');
             $table->unsignedBigInteger('business_entity_id');
         });
