@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BusinessAddress extends Model
 {
     protected $fillable=[
-        'aid',
+        'address_id',
         'business_entity_id'
     ];
 
