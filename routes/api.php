@@ -34,8 +34,11 @@ Route::put('businesstypes/{id}', 'BusinessTypeController@update');
 Route::get('businessaddress', 'BusinessAddressController@index');
 Route::get('businessaddress/{id}', 'BusinessAddressController@show');
 
-Route::get('address', 'AddressController@index');
-Route::get('address/{id}', 'AddressController@show');
-
+Route::get('addresses', 'AddressController@index');
+Route::get('addresses/{id}', 'AddressController@show');
+Route::get('addresses/search/{query}', 'AddressController@search');
+Route::post('addresses', 'AddressController@store');
+Route::delete('addresses/{id}', 'AddressController@destroy');
+Route::put('addresses/{id}', 'AddressController@update');
 
 
