@@ -17,7 +17,7 @@ class BusinessEntityController extends Controller
     public function show($id){
         $business_entity=BusinessEntity::find($id);
 
-        return response()->json($business_entity);
+        return response()->xml($business_entity::all());
     }
 
     public function store(Request $request){
