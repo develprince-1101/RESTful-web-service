@@ -7,52 +7,73 @@ use App\Address;
 
 class AddressController extends Controller
 {
-    public function index(){
-        $business_address=Address::all();
+    public function index()
+    {
 
-        return response()->json(['address' => $business_address]);
+            $addresses = Address::all();
+            return view ('addresses.index')->with('addresses', $addresses);
     }
-    public function show($id){
-        $business_address=Address::find($id);
 
-        return response()->json(['address' => $business_address]);
+    public function show($id)
+    {
+        $address=Address::find($id);
+
+        return view('addresses.update')->with('address', $address);
+
     }
-    public function store(Request $request){
-        $business_address=Address::create([
-            'street' => $request->description,
-            'building_no' => $request->building_no
+
+    public function add()
+    {
+            return view ('addresses.add');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'city'     => 'required',
+            'zip_code' => 'required',
+            'province' => 'required',
+            'country'  => 'required'
         ]);
-        return response()->json($this->getAll());
-    }
 
-    public function destroy($id){
-        $business_address=Address::find($id);
-        $business_address->delete();
+        $address=Address::create([
+            'city'     => $request->city,
+            'zip_code' => $request->zip_code,
+            'province' => $request->province,
+            'country'  => $request->country
+        ]);
 
-        return response()->json($this->getAll());
-
+            return redirect('/addresses');
     }
 
     public function update(Request $request,$id){
-        $business_address=Address::find($id);
-        $business_address->street=$request->street;
-        $business_address->building_no=$request->building_no;
-        $business_address->save();
 
-        return response()->json($this->getAll());
+        $validatedData = $request->validate([
+            'city'     => 'required',
+            'zip_code' => 'required',
+            'province' => 'required',
+            'country'  => 'required'
+        ]);
+
+        $address           = Address::find($id);
+        $address->city     = $request->city;
+        $address->zip_code = $request->zip_code;
+        $address->province = $request->province;
+        $address->country  = $request->country;
+        $address->save();
+
+        return redirect('/addresses');
+    }
+
+    public function destroy($id){
+        $address=Address::find($id);
+        $address->delete();
+
+        return redirect('/addresses');
 
     }
-    public function search(Request $request, $query){
-        //return response()->json($query);
-        $business_query=Address::where('street','LIKE','%'.$query.'%')->get();
 
-        return response()->json(['Address' => $business_query]);
-    }
 
-    private function getAll()
-    {
-        $business_address = Address::all();
 
-        return $business_address;
-    }
+
 }

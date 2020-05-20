@@ -12,29 +12,10 @@ class AddressSeeder extends Seeder
      */
     public function run()
     {
-        Address::create([
-            'street' => 'villaverde',
-            'building_number' => '14C'
-        ]);
-        Address::create([
-            'street' => 'tibanga',
-            'building_number' => '15A'
-        ]);
-        Address::create([
-            'street' => 'Santiago',
-            'building_number' => '24F'
-        ]);
-        Address::create([
-            'street' => 'San Miguel',
-            'building_number' => '11C'
-        ]);
-        Address::create([
-            'street' => 'Aguinaldo',
-            'building_number' => '12I'
-        ]);
-        Address::create([
-            'street' => 'Mahayahay',
-            'building_number' => '18H'
-        ]);
+        $addresses = array(
+            array('id'=> 1, 'city' => 'Iligan', 'zip_code' => '9200', 'province' => 'Lanao Del Norte', 'country' => 'Philippines',),
+        );
+
+        Address::insert($addresses);
     }
 }
